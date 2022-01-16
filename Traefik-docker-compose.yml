@@ -27,7 +27,7 @@ services:
       - --certificatesResolvers.mytlschallenge.acme.dnsChallenge.provider=namecheap
       - --certificatesresolvers.mytlschallenge.acme.email=${emailaddress}
       - --certificatesresolvers.mytlschallenge.acme.storage=/letsencrypt/acme.json
-      - --pilot.token=9ea37471-a1b1-4094-a2e3-c50298f6e8dc
+    
 
     volumes:
       - "letsencrypt:/letsencrypt"
