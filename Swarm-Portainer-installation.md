@@ -63,11 +63,24 @@
 
 1. Create directory and cd into newly created directory
 `mkdir -p /opt/portainer && cd /opt/portainer`
-2. Curl  Portainer docker-compose file from my repository OR from portainer
+2. Use the Portainer docker-compose file from my repository OR from portainer
+    - The easiest way to get the portainer docker-compose from my repository is by cloning the entire repository with the command: `git clone https://Mastadamus@dev.azure.com/Mastadamus/OpenCTI/_git/OpenCTI`
+        - Alternatively you may navigate to my repo in your browser and download the file manually at https://dev.azure.com/Mastadamus/_git/OpenCTI
+        - The file you want is `Portainer-minus-Traefik.yml.` You will want to rename this `portainer-agent-stack.yml`
+        - You may also simply create a file named `portainer-agent-stack.yml` and paste the contents of the file `Portainer-minus-Traefik.yml` into it. 
     - Portainer official docker-compose can be found here: https://downloads.portainer.io/portainer-agent-stack.yml
     `curl -L https://downloads.portainer.io/portainer-agent-stack.yml -o portainer-agent-stack.yml`
     - Note if you use the docker-compose from portainer, you will need to change the port mappings in it as it will conflict with OpenCTI port mappings. They will need to be mapped as so:
 ![image.png](/.attachments/image-286db768-e00f-471f-a77b-ae0b17928def.png)
+
+2. Deploy Portainer
+    - After the ports are changed(if using the portainer official docker-compose file. They are already changed in the docker-compose present in this repository) we may deploy portainer.
+    - Ensure any file name changes have been made per above instructions
+    - Run the following command to bring up the portainer stack:
+    `docker stack deploy --compose-file=portainer-agent-stack.yml portainer`
+        - This command will start Portainer. From this point, you can reach the portainer GUI via your browser by entering the public IP address of any node in the docker swarm with :19000 as the port. ex `http://YourIp:19000` . (this is assuming you have stood this up in the cloud and can reach it from a public IP. If using a vpn to access the subnet of the swarm hosts, then use the private IP.)
+        
+
 
     
 
