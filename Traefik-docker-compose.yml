@@ -39,7 +39,7 @@ services:
         - "traefik.http.routers.http-catchall.rule=HostRegexp(`{host:.+}`)"
         - "traefik.enable=true"
         - "traefik.http.routers.api.entrypoints=https"
-        - "traefik.http.routers.api.rule=Host(`traefik.noctedefensor.com`)"
+        - "traefik.http.routers.api.rule=Host(`traefik.<ChangeME>.com`)"
         - "traefik.http.routers.api.service=api@internal"
         - "traefik.http.routers.api.tls=true"
         - "traefik.http.services.api.loadbalancer.server.port=8080"
