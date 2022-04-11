@@ -44,10 +44,7 @@ services:
         find . -type f -exec chmod 640 \{\} \;;
         echo "Waiting for Elasticsearch availability";
         until curl -s --cacert config/certs/ca/ca.crt https://elasticsearch:9200 | grep -q "missing authentication credentials"; do sleep 30; done;
-        echo "Thats its folks";
-
-
-      '
+        echo "Thats its folks";'
     healthcheck:
       test: ["CMD-SHELL", "[ -f config/certs/elasticsearch/elasticsearch.crt ]"]
       interval: 1s
