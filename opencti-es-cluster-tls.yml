@@ -157,7 +157,7 @@ services:
       - SERVERNAME=localhost
       - ELASTICSEARCH_URL=htps://elasticsearch:9200
       - ELASTICSEARCH_HOSTS=https://elasticsearch:9200
-      - ELASTICSEARCH_USERNAME=kibana_system
+      - ELASTICSEARCH_USERNAME=${kibanauser}
       - ELASTICSEARCH_PASSWORD=${kibanapass}
       - ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES=config/certs/ca/ca.crt
 
@@ -235,6 +235,16 @@ services:
       - RABBITMQ__PASSWORD=${RABBITMQ_DEFAULT_PASS}
       - PROVIDERS__LOCAL__STRATEGY=LocalStrategy
       - SUBSCRIPTION_SCHEDULER__ENABLED=false
+      - PROVIDERS__LDAP__STRATEGY=LdapStrategy
+      - PROVIDERS__LDAP__CONFIG__URL=ldaps://Your.Domain.Name:636
+      - PROVIDERS__LDAP__CONFIG__BIND_DN={{`cn=admin,ou=system,dc=YourLDAPserverName`}}
+      - PROVIDERS__LDAP__CONFIG__BIND_CREDENTIALS=XXXXXXXXXX
+      - PROVIDERS__LDAP__CONFIG__SEARCH_BASE={{`ou=users,dc=YourLDAPserverName`}}
+      - PROVIDERS__LDAP__CONFIG__SEARCH_FILTER={{`(cn={{username}})`}}
+      - PROVIDERS__LDAP__CONFIG__MAIL_ATTRIBUTE=mail
+      - PROVIDERS__LDAP__CONFIG__ACCOUNT_ATTRIBUTE=givenName
+      - PROVIDERS__LDAP__CONFIG__ALLOW_SELF_SIGNED=true
+      - PROVIDERS__LOCAL__STRATEGY=LocalStrategy
     ports:
       - "8080:8080"
     deploy:
